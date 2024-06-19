@@ -32,3 +32,20 @@ def create_comment(request):
     else:
         form = CommentForm()
     return render(request, 'create_comment.html', {'form': form})
+
+
+def comment_detail(request, pk):
+    parent_comment = Comment.objects.get(pk=pk)
+    replies = parent_comment.replies.all()
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST, request.FILES)
+        if form.is_valid():
+            print(form.cleaned_data)
+            new_comment = form.save(commit=False)
+            new_comment.parent = parent_comment
+            new_comment.save()
+            return redirect('comment_detail', pk=pk)
+    else:
+        form = CommentForm(initial={'parent': parent_comment})
+    return render(request, 'comment_detail.html', {'parent_comment': parent_comment, 'replies': replies, 'form': form})
