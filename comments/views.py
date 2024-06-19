@@ -31,7 +31,7 @@ def create_comment(request):
             return redirect('comment_list')
     else:
         form = CommentForm()
-    return render(request, 'create_comment.html', {'form': form})
+    return render(request, 'comments/create_comment.html', {'form': form})
 
 
 def comment_detail(request, pk):
@@ -48,4 +48,4 @@ def comment_detail(request, pk):
             return redirect('comment_detail', pk=pk)
     else:
         form = CommentForm(initial={'parent': parent_comment})
-    return render(request, 'comment_detail.html', {'parent_comment': parent_comment, 'replies': replies, 'form': form})
+    return render(request, 'comments/comment_detail.html', {'parent_comment': parent_comment, 'replies': replies, 'form': form})

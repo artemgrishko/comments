@@ -20,7 +20,7 @@
     <button class="toggle-replies">Развернуть</button>
     <ul style="list-style-type: circle; margin-left: 20px; display: none;">
       {% for reply in comment.replies.all %}
-        {% include 'comment.html' with comment=reply only %}
+        {% include 'comments/comment.html' with comment=reply only %}
       {% endfor %}
     </ul>
   {% endif %}

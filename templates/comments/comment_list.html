@@ -6,26 +6,21 @@
     <thead class="thead-dark">
       <tr>
         <th scope="col">
-          <a href="?sort_by=user_name&order={{ request.GET.order|default:'asc' }}">Имя пользователя</a>
+          <a href="?sort_by=user_name&order={{ request.GET.order|default:'asc' }}">Sort by name</a>
         </th>
         <th scope="col">
-          <a href="?sort_by=email&order={{ request.GET.order|default:'asc' }}">E-mail</a>
+          <a href="?sort_by=email&order={{ request.GET.order|default:'asc' }}">Sort by E-mail</a>
         </th>
         <th scope="col">
-          <a href="?sort_by=created_at&order={{ request.GET.order|default:'asc' }}">Дата добавления</a>
+          <a href="?sort_by=created_at&order={{ request.GET.order|default:'asc' }}">Sort by date</a>
         </th>
       </tr>
     </thead>
     <tbody>
       {% for comment in comments %}
         <tr>
-          <td>{{ comment.user_name }}</td>
-          <td>{{ comment.email }}</td>
-          <td>{{ comment.created_at }}</td>
-        </tr>
-        <tr>
           <td colspan="3">
-            {% include 'comment.html' with comment=comment only %}
+            {% include 'comments/comment.html' with comment=comment only %}
           </td>
         </tr>
       {% endfor %}
