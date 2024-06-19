@@ -1,5 +1,7 @@
+from django.shortcuts import render, redirect
 from django.views.generic import ListView
 
+from .forms import CommentForm
 from .models import Comment
 
 
@@ -18,3 +20,15 @@ class CommentListView(ListView):
                 sort_by = '-' + sort_by
             queryset = queryset.order_by(sort_by)
         return queryset
+
+
+def create_comment(request):
+    if request.method == 'POST':
+        form = CommentForm(request.POST, request.FILES)
+        if form.is_valid():
+            print(form.cleaned_data)
+            form.save()
+            return redirect('comment_list')
+    else:
+        form = CommentForm()
+    return render(request, 'create_comment.html', {'form': form})
