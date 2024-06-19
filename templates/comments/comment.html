@@ -1,0 +1,27 @@
+<li>
+  <strong>{{ comment.user_name }}</strong> ({{ comment.email }}) - {{ comment.created_at }}
+  <br>
+  {% if comment.image %}
+    <img src="{{ comment.image.url }}" alt="Image for {{ comment.user_name }}" style="max-width: 320px; max-height: 240px;">
+    <br>
+  {% endif %}
+
+  {{ comment.text }}
+  <br>
+
+  {% if comment.text_file %}
+    <a href="{{ comment.text_file.url }}" style="font-size: 14px;">Просмотреть текстовый файл</a>
+  {% endif %}
+  <br>
+  <a href="{% url 'comment_detail' comment.pk %}">Добавить ответ</a>
+  <br>
+
+  {% if comment.replies.exists %}
+    <button class="toggle-replies">Развернуть</button>
+    <ul style="list-style-type: circle; margin-left: 20px; display: none;">
+      {% for reply in comment.replies.all %}
+        {% include 'comment.html' with comment=reply only %}
+      {% endfor %}
+    </ul>
+  {% endif %}
+</li>
