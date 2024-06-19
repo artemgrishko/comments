@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Комментарий {{ parent_comment.pk }}</h1>
+  <p>{{ parent_comment.text }}</p>
+
+  <h2>Ответы</h2>
+  <ul>
+    {% for reply in replies %}
+      <li>
+        {{ reply.text }}
+        <a href="{% url 'comment_detail' reply.pk %}">Ответы</a>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <h2>Добавить ответ</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Добавить ответ</button>
+  </form>
+{% endblock %}
+
