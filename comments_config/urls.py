@@ -24,4 +24,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('api/', include('comments.urls')),
     path('captcha/', include('captcha.urls')),
+    path("user/", include('user.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
