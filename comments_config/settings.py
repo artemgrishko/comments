@@ -11,8 +11,11 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 import dj_database_url
 
+
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -21,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-*_@^3!mxspk9*(tf5k@0z6u(z3$92h3_fum9ypf_*=++aqvx^y"
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -41,7 +44,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     "comments",
     "captcha",
-    'rest_framework',
+    "rest_framework",
     "user"
 ]
 
@@ -81,13 +84,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "comments_config.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-default_db_url = "postgres://fxunierw:V4bCF69VqtGYcKu_G_q_V6ohm3FyXkWU@cornelius.db.elephantsql.com/fxunierw"
+# db_url = "postgres://fxunierw:V4bCF69VqtGYcKu_G_q_V6ohm3FyXkWU@cornelius.db.elephantsql.com/fxunierw"
+db_url = os.getenv("POSTGRES_DB_URL")
+
 DATABASES = {
-    'default': dj_database_url.config(default=default_db_url, conn_max_age=500)
+    'default': dj_database_url.config(default=db_url, conn_max_age=500)
 }
 
 
