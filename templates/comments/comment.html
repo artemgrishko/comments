@@ -1,5 +1,5 @@
 <li>
-  <strong>{{ comment.user_name }}</strong> ({{ comment.email }}) - {{ comment.created_at }}
+  <strong>{{ comment.user_name }}</strong> {{ comment.created_at }}
   <br>
   {% if comment.image %}
     <img src="{{ comment.image.url }}" alt="Image for {{ comment.user_name }}" style="max-width: 320px; max-height: 240px;">
