@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
+from django.contrib.auth.decorators import login_required
+
 
 from .forms import CommentForm
 from .models import Comment
@@ -22,6 +24,7 @@ class CommentListView(ListView):
         return queryset
 
 
+@login_required
 def create_comment(request):
     if request.method == 'POST':
         form = CommentForm(request.POST, request.FILES)
@@ -41,7 +44,6 @@ def comment_detail(request, pk):
     if request.method == 'POST':
         form = CommentForm(request.POST, request.FILES)
         if form.is_valid():
-            print(form.cleaned_data)
             new_comment = form.save(commit=False)
             new_comment.parent = parent_comment
             new_comment.save()
