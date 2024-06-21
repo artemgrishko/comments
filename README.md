@@ -4,7 +4,7 @@ API service for comments management.
 
 ## Check it out!
 
-[Restaurant project deployed to Render](https://comments-hx6d.onrender.com/)
+[Comments project deployed to Render](https://comments-hx6d.onrender.com/)
 
 
 ## Installing using GitHub
