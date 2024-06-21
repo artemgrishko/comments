@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Комментарий {{ parent_comment.pk }}</h1>
-  <p>{{ parent_comment.text }}</p>
+  <h1>{{ parent_comment.text }}</h1>
 
   <h2>Ответы</h2>
   <ul>
