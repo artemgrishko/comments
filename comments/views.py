@@ -10,7 +10,7 @@ class CommentListView(ListView):
     model = Comment
     template_name = 'comment_list.html'
     context_object_name = 'comments'
-    paginate_by = 2
+    paginate_by = 25
 
     def get_queryset(self):
         queryset = Comment.objects.filter(parent=None)
