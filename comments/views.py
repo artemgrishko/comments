@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
-from django.contrib.auth.decorators import login_required
 
 
 from .forms import CommentForm
@@ -24,7 +23,6 @@ class CommentListView(ListView):
         return queryset
 
 
-@login_required
 def create_comment(request):
     if request.method == 'POST':
         form = CommentForm(request.POST, request.FILES)
